@@ -50,3 +50,10 @@
     margin-left: 10px;
     background-color: #f6f6f600;
 }
+
+.sidebar__chats {
+    flex: 1;
+    background-color: white;
+    /* overflow-y: scroll; */
+    overflow: scroll;
+}
