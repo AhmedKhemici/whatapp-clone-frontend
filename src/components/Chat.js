@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import MicIcon from '@mui/icons-material/Mic';
 
 const Chat = () => {
   return (
@@ -58,6 +59,7 @@ const Chat = () => {
             Send a message
           </button>
         </form>
+        <MicIcon />
       </div>
     </div>
   )
