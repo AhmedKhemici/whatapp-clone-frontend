@@ -6,6 +6,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import MicIcon from '@mui/icons-material/Mic';
+import ChatMessage from './ChatMessage.js';
 
 const Chat = () => {
   return (
@@ -29,27 +30,22 @@ const Chat = () => {
         </div>
       </div>
       <div className="chat__body">
-        <p className="chat__message">
-          <span className="chat__name">Solid Snake</span>
-          This is a message
-          <span className="chat__timestamp">
-            {new Date().toUTCString()}
-          </span>
-        </p>
-        <p className="chat__message chat__receiver">
-          <span className="chat__name">Solid Snake</span>
-          This is a message
-          <span className="chat__timestamp">
-            {new Date().toUTCString()}
-          </span>
-        </p>
-        <p className="chat__message">
-          <span className="chat__name">Solid Snake</span>
-          This is a message
-          <span className="chat__timestamp">
-            {new Date().toUTCString()}
-          </span>
-        </p>
+        <ChatMessage 
+          name='Solid Snake'
+          message='Kept you waiting huh?!'
+          timestamp={new Date().toUTCString()}
+        />
+        <ChatMessage 
+          type='receiver'
+          name='Big Boss'
+          message='hi thats my line !'
+          timestamp={new Date().toUTCString()}
+        />
+        <ChatMessage 
+          name='Solid Snake'
+          message='MGS1 Was the first game not MGS3'
+          timestamp={new Date().toUTCString()}
+        />
       </div>
       <div className="chat__footer">
         <SentimentSatisfiedAltIcon />
