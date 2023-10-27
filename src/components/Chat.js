@@ -1,5 +1,4 @@
-import React from 'react'
-import './Chat.css'
+import React, { useEffect, useState } from 'react'
 import { Avatar, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
@@ -7,8 +6,35 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import MicIcon from '@mui/icons-material/Mic';
 import ChatMessage from './ChatMessage.js';
+import './Chat.css'
+import axios from 'axios';
+
+
 
 const Chat = () => {
+  const [ messageList, setMessagesList ] = useState([]);
+  
+  useEffect(()=>{
+    axios.get('http://127.0.0.1:9000/api/v1/messages/sync').then(result => {
+      console.log(`Messages Returned`);
+      console.log(result);
+      setMessagesList(result.data);
+    }).catch(err => {
+      console.log(err);
+    });
+  },[]);
+
+  const chatRoom = <>
+                {messageList.map((data) =>{
+                  return <ChatMessage 
+                      key={data._id}
+                      name={data.name}
+                      received={data.received}
+                      message={data.message}
+                      timestamp={data.timestamp}
+                    />
+                })}
+              </>
   return (
     <div className="chat">
       <div className="chat__header">
@@ -30,22 +56,7 @@ const Chat = () => {
         </div>
       </div>
       <div className="chat__body">
-        <ChatMessage 
-          name='Solid Snake'
-          message='Kept you waiting huh?!'
-          timestamp={new Date().toUTCString()}
-        />
-        <ChatMessage 
-          type='receiver'
-          name='Big Boss'
-          message='hi thats my line !'
-          timestamp={new Date().toUTCString()}
-        />
-        <ChatMessage 
-          name='Solid Snake'
-          message='MGS1 Was the first game not MGS3'
-          timestamp={new Date().toUTCString()}
-        />
+        {chatRoom}
       </div>
       <div className="chat__footer">
         <SentimentSatisfiedAltIcon />

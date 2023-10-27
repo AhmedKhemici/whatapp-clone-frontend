@@ -2,7 +2,7 @@ import React from 'react';
 import './ChatMessage.css';
 
 const ChatMessage = ( props) => {
-  const chatMessage = 'chat__message ' + [props.type ? 'chat__receiver' : '']
+  const chatMessage = 'chat__message ' + [props.received ? 'chat__receiver' : '']
   return (
     <p className={chatMessage}>
       <span className="chat__name">{props.name}</span>
