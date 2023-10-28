@@ -1,13 +1,14 @@
-import { React, useState, useEffect} from 'react';
+import React ,{ useState, useEffect} from 'react';
 import './App.css';
+import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 import Chat from './components/Chat';
 import { socket } from './socket';
 
 const App =() => {
+  const [user, setUser] = useState({});
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [fooEvents, setFooEvents] = useState([]);
-
   useEffect(() => {
     function onConnect() {
       setIsConnected(true);
@@ -31,11 +32,24 @@ const App =() => {
       socket.off('foo', onFooEvent);
     };
   }, []);
+
+  const Login = (
+    <>
+      <Login setUser={setUser} />
+    </>
+  );
+  const whatsAppBody = (
+      <>
+        <Sidebar userData={user} />
+        <Chat userData={user} /> 
+      </>
+    );
+  const body = [user._id ? loginForm : whatsAppBody]
+
   return (
     <div className="app">
       <div className="app__body">
-        <Sidebar />
-        <Chat />
+        {body}
       </div>
     </div>
   );
