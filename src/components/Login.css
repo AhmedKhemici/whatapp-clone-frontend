@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    background-color: #075e54;
+    width: 45rem;
+    height: 37rem;
+    justify-content: center;
+    margin: auto auto;
+    border-radius: 1.5%;
+    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0.75);
+    padding: auto;
+    overflow: hidden;
+}
+
+.form > .MuiSvgIcon-root {
+    font-size: 10rem;
+    margin: 0 auto;
+    color: 	#25d366;
+}
+
+.form> form {
+    flex: 0.65;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form__input {
+    width: 30rem;
+    height: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.form__button {
+    border-radius: 100px;
+    border: none;
+    width: 30rem;
+    height: 1.5rem;
+}
