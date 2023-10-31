@@ -5,8 +5,12 @@ import './Login.css';
 
 const Login = ( props) => {
   const loginUser = (event) =>{
-    // event.preventDefault();
-    axios.post('http://127.0.0.1:9000/api/v1/login',{name:event.target.name, password:event.target.password}).then(result => {
+    event.preventDefault();
+    console.log(event);
+    const fd = new FormData(event.target);
+    const data  = Object.fromEntries(fd.entries());
+    console.log(data);
+    axios.post('http://127.0.0.1:9000/api/v1/login',data).then(result => {
       console.log(`Messages Returned`);
       console.log(result);
       props.setUser(result);
@@ -18,9 +22,15 @@ const Login = ( props) => {
       <div className="form"> 
         <WhatsAppIcon />
         <form action="post" onSubmit={(event) => loginUser(event)}>
-          <input name="name" type="text" className="form__input" placeholder="Username" />
-          <input name="password" type="password" className="form__input" placeholder="*******" />
-          <button type="submit"  className="form__button">login</button>
+          <div className="form__data">
+            <div className="form__inputValid">
+              <input name="name" type="text" className="form__input" placeholder="Username" />
+            </div>
+            <div className="form__inputValid">
+              <input name="password" type="password" className="form__input" placeholder="*********" />
+            </div>
+            <button type="submit"  className="form__button">login</button>
+          </div>
         </form>
       </div>
   )

@@ -1,0 +1,19 @@
+{
+  "silence": false,
+  "terminals": [
+    {
+      "name": "frontend",
+      "icon": "browser", 
+      "color": "terminal.ansiBlue",
+      "focus": true, 
+      "path": "/"
+    },
+    {
+      "name": "git",
+      "icon": "git-branch", 
+      "color": "terminal.ansiRed",
+      "focus": false, 
+      "path": "/"
+    }
+  ]
+}

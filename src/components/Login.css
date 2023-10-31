@@ -18,7 +18,7 @@
     color: 	#25d366;
 }
 
-.form> form {
+.form > form {
     flex: 0.65;
     display: flex;
     flex-direction: column;
@@ -26,15 +26,51 @@
     align-items: center;
 }
 
+.form__data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+
+.form__inputValid {
+    width: 100%;
+    height: 2.1rem;
+    padding: 2px;
+    padding-right: 13px;
+    contain: content;
+    margin-bottom: 5px;
+}
+
+
 .form__input {
-    width: 30rem;
+    width: 100%;
     height: 1.5rem;
-    margin-bottom: 10px;
+    margin: 3px;
+    border-radius: 5px;
+    border: 1px ;
+    outline-width: 0;
+    box-sizing: content-box;
+    border: 1.5px solid floralwhite;
+    transition: outline 0.2s,
+}
+
+.form__input:focus {
+    border: 1.5px solid rgb(0, 243, 182);
+    outline: 3px solid rgba(0, 243, 182, 0.596);
 }
 
 .form__button {
     border-radius: 100px;
     border: none;
-    width: 30rem;
+    width: 100%;
     height: 1.5rem;
+    border: 1.5px solid floralwhite;
+    transition: outline 0.2s,
+}
+
+.form__button:focus {
+    border: 1.5px solid rgb(0, 243, 182);
+    outline: 3px solid rgba(0, 243, 182, 0.596);
 }
