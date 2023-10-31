@@ -49,7 +49,6 @@ const App =() => {
       </>
     );
   const body = [!user._id ? LoginForm : whatsAppBody]
-  console.log(user._id)
   return (
     <div className="app">
       <div className="app__body">

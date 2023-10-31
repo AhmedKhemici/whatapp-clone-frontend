@@ -22,20 +22,17 @@
 }
 
 .chat__headerInfo > p {
-    color: gray
+    color: gray;
 }
 
 .chat__body {
-    background-color: aqua;
     flex: 1;
-    background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+    background-image: url("../../public/img/whatsapp_chat.png");
     background-repeat: repeat;
     background-position: center;
     padding: 30px;
     overflow: scroll;
 }
-
-
 
 .chat__footer {
     display: flex;
