@@ -33,9 +33,12 @@ const App =() => {
   //   };
   // }, []);
 
+  const login = (data) => {
+    setUser(data);
+  }
   const LoginForm = (
     <>
-      <Login setUser={setUser} />
+      <Login login={login} />
     </>
   );
 

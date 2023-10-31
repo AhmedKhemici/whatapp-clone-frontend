@@ -6,14 +6,10 @@ import './Login.css';
 const Login = ( props) => {
   const loginUser = (event) =>{
     event.preventDefault();
-    console.log(event);
     const fd = new FormData(event.target);
     const data  = Object.fromEntries(fd.entries());
-    console.log(data);
     axios.post('http://127.0.0.1:9000/api/v1/login',data).then(result => {
-      console.log(`Messages Returned`);
-      console.log(result);
-      props.setUser(result);
+      props.login(result.data.user);
     }).catch(err => {
       console.log(err);
     });
