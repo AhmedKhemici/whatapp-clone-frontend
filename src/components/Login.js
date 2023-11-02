@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import './Login.css';
+import { initSocket } from '../socket';
 
 const Login = ( props) => {
   const loginUser = (event) =>{
@@ -10,6 +11,7 @@ const Login = ( props) => {
     const data  = Object.fromEntries(fd.entries());
     axios.post('http://127.0.0.1:9000/api/v1/login',data).then(result => {
       props.login(result.data.user);
+      initSocket(result.data.user._id);
     }).catch(err => {
       console.log(err);
     });
