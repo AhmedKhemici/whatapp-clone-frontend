@@ -49,6 +49,7 @@
     outline-width: 0;
     margin-left: 10px;
     background-color: #f6f6f600;
+    width: 100%;
 }
 
 .sidebar__chats {

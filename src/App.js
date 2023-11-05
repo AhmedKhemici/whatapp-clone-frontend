@@ -6,8 +6,12 @@ import Chat from './components/Chat';
 
 const App =() => {
   const [user, setUser] = useState({});
+  const [conversationId, setConversationId] = useState('');
   const login = (data) => {
     setUser(data);
+  }
+  const setCurrentConversation = ( conversation_id) =>{
+    if(conversation_id) setConversationId(conversation_id);
   }
   const LoginForm = (
     <>
@@ -17,8 +21,8 @@ const App =() => {
 
   const whatsAppBody = (
       <>
-        <Sidebar userData={user} />
-        <Chat userData={user} /> 
+        <Sidebar userData={user} setCurrentConversation={setCurrentConversation} />
+        <Chat userData={user} conversationID={conversationId} /> 
       </>
     );
   const body = [!user._id ? LoginForm : whatsAppBody]
