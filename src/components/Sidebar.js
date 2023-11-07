@@ -12,13 +12,10 @@ import URL from '../services/httpService';
 const Sidebar = ( props) => {
   const [ conversations, setConversations ] = useState([]);
   useEffect(()=>{
-    console.log(props.userData._id)
     axios.get(`${URL}/recent-conversations`,
     {headers: {'authorization':props.userData._id}})
     .then( (res) => {
-      console.log(res.data);
       setConversations(res.data.conversations);
-      props.setCurrentConversation(res.data.conversations[0].conversation_id);
     }).catch(err => {
       console.log(err);
     });
@@ -28,6 +25,7 @@ const Sidebar = ( props) => {
     {conversations.map( (conversation) =>{
         return (
           <SidebarChat 
+            key={conversation._id}
             conversationId={conversation.conversation_id}
             avatar="no image"
             contactName="Walid"

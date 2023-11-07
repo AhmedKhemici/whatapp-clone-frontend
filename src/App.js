@@ -25,11 +25,10 @@ const App =() => {
         <Chat userData={user} conversationID={conversationId} /> 
       </>
     );
-  const body = [!user._id ? LoginForm : whatsAppBody]
   return (
     <div className="app">
       <div className="app__body">
-        {body}
+        {!user._id ? LoginForm : whatsAppBody}
       </div>
     </div>
   );

@@ -15,14 +15,16 @@ const Chat = ( props) => {
   const [ messageList, setMessagesList ] = useState([]);
   
   useEffect(()=>{
-    axios.get(`${URL}/conversations/${props.conversationID}/sync-messages`,
-    {headers: {'authorization':props.userData._id}})
-    .then(result => {
-      console.log(result);
-      setMessagesList(result.data);
-    }).catch(err => {
-      console.log(err);
-    });
+    if(props.conversationID){
+      axios.get(`${URL}/conversations/${props.conversationID}/sync-messages`,
+      {headers: {'authorization':props.userData._id}})
+      .then(result => {
+        console.log(result);
+        setMessagesList(result.data);
+      }).catch(err => {
+        console.log(err);
+      });
+    }
   },[props]);
 
 
@@ -59,7 +61,7 @@ const Chat = ( props) => {
     {messageList.map((data) =>{
       return <ChatMessage 
           key={data._id}
-          name={data.name}
+          name={data.name++}
           received={data.received}
           message={data.message}
           timestamp={data.timestamp}
