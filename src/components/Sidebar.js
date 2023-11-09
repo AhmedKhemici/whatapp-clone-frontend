@@ -28,10 +28,10 @@ const Sidebar = ( props) => {
             key={conversation._id}
             conversationId={conversation.conversation_id}
             avatar="no image"
-            contactName="Walid"
-            lastMessage="Yow Man"
-            timestamp={conversation.timestamp}
-            getCurrentConversation={props.setCurrentConversation}
+            contactName={conversation.users[0].user_id.firstName+' '+conversation.users[0].user_id.lastName}
+            lastMessage={conversation.message.message}
+            timestamp={conversation.message.createdAt}
+            setCurrentConversation={props.setCurrentConversation}
           />
         )}
     )}
@@ -59,7 +59,7 @@ const Sidebar = ( props) => {
           </div>
         </div>
         <div className="sidebar__chats">
-          { conversations.length === 0 ? 'You dont have conversations' : conversationBar}
+          { conversations.length === 0 ? 'You don\'t have conversations' : conversationBar}
         </div>
     </div>
   )

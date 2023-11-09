@@ -19,7 +19,6 @@ const Chat = ( props) => {
       axios.get(`${URL}/conversations/${props.conversationID}/sync-messages`,
       {headers: {'authorization':props.userData._id}})
       .then(result => {
-        console.log(result);
         setMessagesList(result.data);
       }).catch(err => {
         console.log(err);
@@ -32,39 +31,37 @@ const Chat = ( props) => {
     event.preventDefault();
     const fd = new FormData(event.target);
     const data  = Object.fromEntries(fd.entries());
-    //TODO: Error Here
     setMessagesList( (old)=>{
-      console.log(old);
-      return old.push({
-        '_id':'new',
-        'name':'Ahmed',
-        'received':true,
-        'message':data.message,
-        'timestamp': Date.now()
-      });
+      const timestamp = Date.now();
+      const createdAt = new Date(timestamp).toISOString();
+      return [...old,{
+        'conversation_id':"bbfea4b1-d130-47a7-9af9-2f35be6ea805",
+        "from": {
+          "_id": props.userData.user_id._id,
+          "firstName": props.userData.user_id.firstName,
+          "lastName": props.userData.user_id.lastName,
+          "phoneNumber": props.userData.user_id.phoneNumber
+        },
+        "message": data.message,
+        "createdAt": createdAt
+      }];
     })
-    data.to = "65441f6cedf833fe6693fecd";
-    axios.post(`${URL}/conversations/${props.conversationID}/send-message`,
-    {
-      headers: {'authorization':props.userData._id},
-      data: data
+    axios.post(`${URL}/conversations/${props.conversationID}/send-message`,data,
+    {headers: {'authorization':props.userData._id},
     })
-    .then(result => {
-      console.log(result);
-      setMessagesList(result.data);
-    }).catch(err => {
+    .catch(err => {
       console.log(err);
     });
   }
-
   const chatRoom = <>
     {messageList.map((data) =>{
-      return <ChatMessage 
+      return <ChatMessage
+          userId={props.userData.user_id._id} 
+          senderId={data.from._id}
           key={data._id}
-          name={data.name++}
-          received={data.received}
+          name={data.from.firstName+' '+data.from.lastName}
           message={data.message}
-          timestamp={data.timestamp}
+          timestamp={data.createdAt}
         />
     })}
   </>
