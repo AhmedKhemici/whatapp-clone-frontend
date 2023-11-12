@@ -8,12 +8,13 @@ import { Avatar, IconButton } from '@mui/material';
 import SidebarChat from './SidebarChat';
 import axios from 'axios';
 import URL from '../services/httpService';
+import Cookies from 'js-cookie';
 
 const Sidebar = ( props) => {
   const [ conversations, setConversations ] = useState([]);
   useEffect(()=>{
     axios.get(`${URL}/recent-conversations`,
-    {headers: {'authorization':props.userData._id}})
+    {headers: {'authorization': Cookies.get('token')}})
     .then( (res) => {
       setConversations(res.data.conversations);
     }).catch(err => {

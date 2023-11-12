@@ -9,7 +9,7 @@ import ChatMessage from './ChatMessage.js';
 import './Chat.css'
 import axios from 'axios';
 import URL from '../services/httpService';
-
+import Cookies from 'js-cookie';
 
 const Chat = ( props) => {
   const [ messageList, setMessagesList ] = useState([]);
@@ -17,7 +17,7 @@ const Chat = ( props) => {
   useEffect(()=>{
     if(props.conversationID){
       axios.get(`${URL}/conversations/${props.conversationID}/sync-messages`,
-      {headers: {'authorization':props.userData._id}})
+      {headers: {'authorization': Cookies.get('token')}})
       .then(result => {
         setMessagesList(result.data);
       }).catch(err => {
@@ -37,17 +37,17 @@ const Chat = ( props) => {
       return [...old,{
         'conversation_id':"bbfea4b1-d130-47a7-9af9-2f35be6ea805",
         "from": {
-          "_id": props.userData.user_id._id,
-          "firstName": props.userData.user_id.firstName,
-          "lastName": props.userData.user_id.lastName,
-          "phoneNumber": props.userData.user_id.phoneNumber
+          "_id": props.userData._id,
+          "firstName": props.userData.firstName,
+          "lastName": props.userData.lastName,
+          "phoneNumber": props.userData.phoneNumber
         },
         "message": data.message,
         "createdAt": createdAt
       }];
     })
     axios.post(`${URL}/conversations/${props.conversationID}/send-message`,data,
-    {headers: {'authorization':props.userData._id},
+    {headers: {'authorization':Cookies.get('token')},
     })
     .catch(err => {
       console.log(err);
@@ -56,7 +56,7 @@ const Chat = ( props) => {
   const chatRoom = <>
     {messageList.map((data) =>{
       return <ChatMessage
-          userId={props.userData.user_id._id} 
+          userId={props.userData._id} 
           senderId={data.from._id}
           key={data._id}
           name={data.from.firstName+' '+data.from.lastName}

@@ -5,7 +5,8 @@ import Sidebar from './components/Sidebar';
 import Chat from './components/Chat';
 
 const App =() => {
-  const [user, setUser] = useState({});
+  const userData = JSON.parse(localStorage.getItem('userData')) || {};
+  const [user, setUser] = useState(userData);
   const [conversationId, setConversationId] = useState('');
   const login = (data) => {
     setUser(data);

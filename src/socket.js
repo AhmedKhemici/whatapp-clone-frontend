@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-
+import Cookies from 'js-cookie';
 
 const URL = process.env.NODE_ENV === 'production' ? undefined : 'ws://127.0.0.1:9000';
 let socket;
@@ -7,7 +7,9 @@ let socket;
 const initSocket = (auth) => {
     console.log('SOCKET');
     console.log(auth);
-    socket = io(URL);
+    socket = io(URL,{
+        token: Cookies.get('token')
+      });
     return socket;
 }
 const getSocket = () => {
