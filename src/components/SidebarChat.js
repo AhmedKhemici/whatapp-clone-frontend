@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material'
 
 const SidebarChat = ( props) => {
   return (
-    <div className="sidebarChat" onClick={()=>props.setCurrentConversation(props.conversationId)}>
+    <div className="sidebarChat" onClick={()=>props.setCurrentConversation({conversationId: props.conversationId, toId: props.toId})}>
       <Avatar />
       <div className="sidebarChat__info">
         <h2>{props.contactName}</h2>

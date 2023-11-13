@@ -15,8 +15,8 @@ const Chat = ( props) => {
   const [ messageList, setMessagesList ] = useState([]);
   
   useEffect(()=>{
-    if(props.conversationID){
-      axios.get(`${URL}/conversations/${props.conversationID}/sync-messages`,
+    if(props.conversationData.conversationId){
+      axios.get(`${URL}/conversations/${props.conversationData.conversationId}/sync-messages`,
       {headers: {'authorization': Cookies.get('token')}})
       .then(result => {
         setMessagesList(result.data);
@@ -31,6 +31,7 @@ const Chat = ( props) => {
     event.preventDefault();
     const fd = new FormData(event.target);
     const data  = Object.fromEntries(fd.entries());
+    data.to = props.conversationData.toId;
     setMessagesList( (old)=>{
       const timestamp = Date.now();
       const createdAt = new Date(timestamp).toISOString();
@@ -46,7 +47,7 @@ const Chat = ( props) => {
         "createdAt": createdAt
       }];
     })
-    axios.post(`${URL}/conversations/${props.conversationID}/send-message`,data,
+    axios.post(`${URL}/conversations/${props.conversationData.conversationId}/send-message`,data,
     {headers: {'authorization':Cookies.get('token')},
     })
     .catch(err => {

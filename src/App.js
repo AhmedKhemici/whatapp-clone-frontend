@@ -7,12 +7,17 @@ import Chat from './components/Chat';
 const App =() => {
   const userData = JSON.parse(localStorage.getItem('userData')) || {};
   const [user, setUser] = useState(userData);
-  const [conversationId, setConversationId] = useState('');
+  const conData = JSON.parse(localStorage.getItem('conversationData')) || {};
+  const [conversationData, setConversationData] = useState(conData);
+  
   const login = (data) => {
     setUser(data);
   }
-  const setCurrentConversation = ( conversation_id) =>{
-    if(conversation_id) setConversationId(conversation_id);
+  const setCurrentConversation = ( conversationData) =>{
+    if(conversationData){
+      localStorage.setItem('conversationData', JSON.stringify(conversationData));
+      setConversationData(conversationData);
+    }
   }
   const LoginForm = (
     <>
@@ -23,7 +28,7 @@ const App =() => {
   const whatsAppBody = (
       <>
         <Sidebar userData={user} setCurrentConversation={setCurrentConversation} />
-        <Chat userData={user} conversationID={conversationId} /> 
+        <Chat userData={user} conversationData={conversationData} /> 
       </>
     );
   return (

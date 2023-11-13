@@ -4,7 +4,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import './Login.css';
 import URL from '../services/httpService';
 import Cookies from 'js-cookie';
-import { initSocket } from '../socket';
+import { initSocket } from '../services/socketService';
 
 const Login = ( props) => {
   const loginUser = (event) =>{

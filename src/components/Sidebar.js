@@ -28,6 +28,7 @@ const Sidebar = ( props) => {
           <SidebarChat 
             key={conversation._id}
             conversationId={conversation.conversation_id}
+            toId={conversation.users[0].user_id._id}
             avatar="no image"
             contactName={conversation.users[0].user_id.firstName+' '+conversation.users[0].user_id.lastName}
             lastMessage={conversation.message.message}
