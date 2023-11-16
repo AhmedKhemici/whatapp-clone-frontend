@@ -10,7 +10,7 @@ import axios from 'axios';
 import URL from '../services/httpService';
 import Cookies from 'js-cookie';
 
-const Sidebar = ( props) => {
+const Sidebar = () => {
   const [ conversations, setConversations ] = useState([]);
   useEffect(()=>{
     axios.get(`${URL}/recent-conversations`,
@@ -20,7 +20,7 @@ const Sidebar = ( props) => {
     }).catch(err => {
       console.log(err);
     });
-  },[props]);
+  },[]);
 
   const conversationBar = <>
     {conversations.map( (conversation) =>{
@@ -33,11 +33,11 @@ const Sidebar = ( props) => {
             contactName={conversation.users[0].user_id.firstName+' '+conversation.users[0].user_id.lastName}
             lastMessage={conversation.message.message}
             timestamp={conversation.message.createdAt}
-            setCurrentConversation={props.setCurrentConversation}
           />
         )}
     )}
   </>
+
   return (
     <div className="sidebar">
         <div className="sidebar__header">
@@ -61,7 +61,8 @@ const Sidebar = ( props) => {
           </div>
         </div>
         <div className="sidebar__chats">
-          { conversations.length === 0 ? 'You don\'t have conversations' : conversationBar}
+          { conversations.length === 0 && 'You don\'t have conversations'}
+          { conversations.length !== 0 && conversationBar }
         </div>
     </div>
   )
